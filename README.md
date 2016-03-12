@@ -1,6 +1,6 @@
 # File Selector CocoPod plugin for adding Squencing.com's Real-Time Personalization technology to iOS apps coded in Swift
 =========================================
-This repo contains the plug-n-play CocoPod for implementing a customizable File Selector so your app can access files stored securely at [Sequencing.com's](https://sequencing.com/). 
+This repo contains the plug-n-play CocoPod for implementing a customizable File Selector so your app can access files stored securely at [Sequencing.com](https://sequencing.com/). 
 
 This CocoPod can be used to quickly add a File Selector to your app. By adding this File Selector to your app, you're app user will be able to select a file stored securely in the user's Sequencing.com account. Your app will then be able to use the genetic data in this file to provide the user with Real-Time Personalization.
 
