@@ -16,7 +16,7 @@ Once the Master Plugin is added to your app all you'll need to do is:
 
 To code Real-Time Personalization technology into apps, developers may [register for a free account](https://sequencing.com/user/register/) at Sequencing.com. App development with RTP is always free.
 
-Also available in these other coding languages
+Related repos
 =========================================
 **Master Plugin is available in the following languages:**
 * [Swift (CocoaPod plugin)](https://github.com/SequencingDOTcom/CocoaPods-iOS-Master-Plugin-Swift)
@@ -44,7 +44,7 @@ File Selector Code
 
 Contents
 =========================================
-* Also available in these other coding languages
+* Related repos
 * Implementation
 * App chains
 * Authentication flow
