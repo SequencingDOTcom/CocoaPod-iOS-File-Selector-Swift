@@ -8,9 +8,9 @@ While the File Selector works out-of-the-box, it is also fully customizable.
 
 A 'Master CocoPod Plugin' is also available. The Master Plugin contains a customizable, end-to-end solution that quickly adds all necessary code to your app for Sequencing.com's Real-Time Personalization. Once the Master Plugin is added to your app all you'll need to do is add:
 
-1) your [OAuth2 secret](https://sequencing.com/developer-center/new-app-oauth-secret)
-2) one or more [App Chain numbers](https://sequencing.com/app-chains/)
-3) configure your app based on each [app chain's possible responses](https://sequencing.com/app-chains/)
+1. your [OAuth2 secret](https://sequencing.com/developer-center/new-app-oauth-secret)
+2. one or more [App Chain numbers](https://sequencing.com/app-chains/)
+3. configure your app based on each [app chain's possible responses](https://sequencing.com/app-chains/)
 
 To code Real-Time Personalization technology into apps, developers may [register for a free account](https://sequencing.com/user/register/) at Sequencing.com. App development with RTP is always free.
 
