@@ -15,7 +15,7 @@ typealias FilesHttpCallback = (responseText: NSString?, response: NSURLResponse?
 class SQFilesHttpHelper: NSObject {
     
     // MARK: - Initializer
-    static let instance = SQHttpHelper()
+    static let instance = SQFilesHttpHelper()
     
     
     // MARK: - execHttpRequestWithUrl
