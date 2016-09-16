@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="fAn-jm-DKw">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Files Intro View Controller-->
+        <scene sceneID="SHV-NP-z2R">
+            <objects>
+                <viewController id="N0L-Oi-G8Z" customClass="SQFilesIntroViewController" customModule="oauthdemoapp_swift" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="sOC-tY-fp2"/>
+                        <viewControllerLayoutGuide type="bottom" id="dnB-Zr-0Wd"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="zQs-IG-9GJ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0bo-cU-pff" userLabel="gray view">
+                                <rect key="frame" x="0.0" y="64" width="600" height="236"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gGA-AX-y9C" userLabel="rtpText">
+                                <rect key="frame" x="20" y="84" width="560" height="85"/>
+                                <string key="text">This app is powered by genetic data.
+
+Do you want this app to analyze genetic data from one of your files or a sample file?</string>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="74j-UY-OIJ" userLabel="buttons view">
+                                <rect key="frame" x="163" y="199" width="274" height="71"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wzn-kK-imI" userLabel="myfiles button">
+                                        <rect key="frame" x="0.0" y="0.0" width="127" height="71"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_myfiles_color" translatesAutoresizingMaskIntoConstraints="NO" id="Fz2-fr-pgh" userLabel="myfiles image">
+                                                <rect key="frame" x="39" y="0.0" width="50" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="50" id="hoG-j7-3CT"/>
+                                                    <constraint firstAttribute="width" secondItem="Fz2-fr-pgh" secondAttribute="height" multiplier="1:1" id="jc6-Lh-KzV"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Files" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eG7-Ej-XQr" userLabel="myfiles label">
+                                                <rect key="frame" x="32" y="45" width="63" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="Fz2-fr-pgh" firstAttribute="top" secondItem="wzn-kK-imI" secondAttribute="top" id="Lsp-kZ-S3m"/>
+                                            <constraint firstItem="eG7-Ej-XQr" firstAttribute="top" secondItem="Fz2-fr-pgh" secondAttribute="bottom" constant="-5" id="aXu-Th-v9D"/>
+                                            <constraint firstItem="Fz2-fr-pgh" firstAttribute="centerX" secondItem="wzn-kK-imI" secondAttribute="centerX" id="elB-Ta-fnf"/>
+                                            <constraint firstItem="eG7-Ej-XQr" firstAttribute="centerX" secondItem="wzn-kK-imI" secondAttribute="centerX" id="uo4-Gh-Eux"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RrF-Ln-DHv" userLabel="samplefiles button">
+                                        <rect key="frame" x="147" y="0.0" width="127" height="71"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_samplefiles_color" translatesAutoresizingMaskIntoConstraints="NO" id="JU0-wb-t9Z" userLabel="samplefiles image">
+                                                <rect key="frame" x="39" y="0.0" width="50" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="JU0-wb-t9Z" secondAttribute="height" multiplier="1:1" id="bma-9k-NpM"/>
+                                                    <constraint firstAttribute="width" constant="50" id="za0-rT-I2V"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sample Files" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jxd-M8-UoU" userLabel="samplefiles label">
+                                                <rect key="frame" x="15" y="45" width="97" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="JU0-wb-t9Z" firstAttribute="centerX" secondItem="RrF-Ln-DHv" secondAttribute="centerX" id="8xj-sd-5Hq"/>
+                                            <constraint firstItem="Jxd-M8-UoU" firstAttribute="centerX" secondItem="RrF-Ln-DHv" secondAttribute="centerX" id="JM8-TX-RWn"/>
+                                            <constraint firstItem="JU0-wb-t9Z" firstAttribute="top" secondItem="RrF-Ln-DHv" secondAttribute="top" id="NML-IC-2Ca"/>
+                                            <constraint firstAttribute="bottom" secondItem="Jxd-M8-UoU" secondAttribute="bottom" constant="5" id="Q6h-44-kT2"/>
+                                            <constraint firstItem="Jxd-M8-UoU" firstAttribute="top" secondItem="JU0-wb-t9Z" secondAttribute="bottom" constant="-5" id="V4P-Er-OyQ"/>
+                                            <constraint firstItem="Jxd-M8-UoU" firstAttribute="leading" secondItem="RrF-Ln-DHv" secondAttribute="leading" constant="15" id="kP4-cQ-Br2"/>
+                                            <constraint firstAttribute="trailing" secondItem="Jxd-M8-UoU" secondAttribute="trailing" constant="15" id="oES-yt-hjF"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="wzn-kK-imI" firstAttribute="leading" secondItem="74j-UY-OIJ" secondAttribute="leading" id="3aS-z6-b8W"/>
+                                    <constraint firstAttribute="trailing" secondItem="RrF-Ln-DHv" secondAttribute="trailing" id="FnI-A5-QzP"/>
+                                    <constraint firstItem="RrF-Ln-DHv" firstAttribute="top" secondItem="wzn-kK-imI" secondAttribute="top" id="Zzy-zP-5Ky"/>
+                                    <constraint firstItem="wzn-kK-imI" firstAttribute="top" secondItem="74j-UY-OIJ" secondAttribute="top" id="g67-Dr-FLU"/>
+                                    <constraint firstItem="wzn-kK-imI" firstAttribute="height" secondItem="RrF-Ln-DHv" secondAttribute="height" id="h7Y-DL-kYs"/>
+                                    <constraint firstItem="wzn-kK-imI" firstAttribute="width" secondItem="RrF-Ln-DHv" secondAttribute="width" id="iio-zW-366"/>
+                                    <constraint firstItem="RrF-Ln-DHv" firstAttribute="leading" secondItem="wzn-kK-imI" secondAttribute="trailing" constant="20" id="t2E-j9-bh1"/>
+                                    <constraint firstAttribute="bottom" secondItem="wzn-kK-imI" secondAttribute="bottom" id="vu9-3j-F2h"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="0bo-cU-pff" firstAttribute="top" secondItem="sOC-tY-fp2" secondAttribute="bottom" id="11h-18-3yn"/>
+                            <constraint firstItem="74j-UY-OIJ" firstAttribute="centerX" secondItem="0bo-cU-pff" secondAttribute="centerX" id="2hA-V4-jcJ"/>
+                            <constraint firstAttribute="trailing" secondItem="0bo-cU-pff" secondAttribute="trailing" id="4V7-pu-Pzl"/>
+                            <constraint firstItem="0bo-cU-pff" firstAttribute="bottom" secondItem="74j-UY-OIJ" secondAttribute="bottom" constant="30" id="Acx-Vy-tZQ"/>
+                            <constraint firstItem="74j-UY-OIJ" firstAttribute="top" secondItem="gGA-AX-y9C" secondAttribute="bottom" constant="30" id="BVY-qI-vZy"/>
+                            <constraint firstItem="gGA-AX-y9C" firstAttribute="trailing" secondItem="0bo-cU-pff" secondAttribute="trailing" constant="-20" id="COr-sX-waE"/>
+                            <constraint firstItem="0bo-cU-pff" firstAttribute="leading" secondItem="zQs-IG-9GJ" secondAttribute="leading" id="Jb1-Hl-OiI"/>
+                            <constraint firstItem="gGA-AX-y9C" firstAttribute="top" secondItem="0bo-cU-pff" secondAttribute="top" constant="20" id="W6h-yU-hOD"/>
+                            <constraint firstItem="gGA-AX-y9C" firstAttribute="leading" secondItem="0bo-cU-pff" secondAttribute="leading" constant="20" id="t7c-FV-B5o"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="7wl-It-ob7"/>
+                    <connections>
+                        <outlet property="grayView" destination="0bo-cU-pff" id="wk5-dd-9Mq"/>
+                        <outlet property="introLabel" destination="gGA-AX-y9C" id="9EF-E8-I4R"/>
+                        <outlet property="myFilesButton" destination="wzn-kK-imI" id="ECE-Et-gll"/>
+                        <outlet property="myFilesIcon" destination="Fz2-fr-pgh" id="rhX-DE-Akg"/>
+                        <outlet property="myFilesLabel" destination="eG7-Ej-XQr" id="B24-pM-1r1"/>
+                        <outlet property="sampleFilesButton" destination="RrF-Ln-DHv" id="v48-bS-ibv"/>
+                        <outlet property="sampleFilesIcon" destination="JU0-wb-t9Z" id="LD1-El-KdR"/>
+                        <outlet property="sampleFilesLabel" destination="Jxd-M8-UoU" id="16f-Nd-W6q"/>
+                        <segue destination="OYv-Jf-pVB" kind="presentation" identifier="SHOW_FILES_SEGUE_ID" modalTransitionStyle="crossDissolve" id="YMI-Nu-SlL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xxw-pQ-guz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1608" y="623"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="SQy-eK-IKz">
+            <objects>
+                <tabBarController id="OYv-Jf-pVB" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="WCF-hP-v7R">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="wAz-0D-eoP" kind="relationship" relationship="viewControllers" id="aXE-Vr-lc4"/>
+                        <segue destination="0tp-7v-3FC" kind="relationship" relationship="viewControllers" id="ihP-ky-xp5"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ja7-NV-WSy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2380" y="623"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Xg9-60-hte">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fAn-jm-DKw" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Z8r-t1-FGR">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="N0L-Oi-G8Z" kind="relationship" relationship="rootViewController" id="Vud-Ws-sV7"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XDE-CB-sYG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="921" y="623"/>
+        </scene>
+        <!--Files My Files View Controller-->
+        <scene sceneID="Ron-WE-zwe">
+            <objects>
+                <viewController id="KFq-Hc-at9" customClass="SQFilesMyFilesViewController" customModule="oauthdemoapp_swift" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="HBm-6g-B5a"/>
+                        <viewControllerLayoutGuide type="bottom" id="2Lo-xM-8NI"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="OXm-em-P1K">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="otS-II-8Kw" userLabel="tableView">
+                                <rect key="frame" x="0.0" y="109" width="600" height="442"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="2T8-H2-T7k" customClass="SQFilesTableCell" customModule="oauthdemoapp_swift" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2T8-H2-T7k" id="Ajp-1B-eM7">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dao-ao-uaP">
+                                                    <rect key="frame" x="8" y="14" width="579" height="16"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Dao-ao-uaP" firstAttribute="centerY" secondItem="Ajp-1B-eM7" secondAttribute="centerY" id="6CE-8a-1Ih"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Dao-ao-uaP" secondAttribute="trailing" constant="5" id="PIw-Ix-P3v"/>
+                                                <constraint firstAttribute="leadingMargin" secondItem="Dao-ao-uaP" secondAttribute="leading" id="xXk-Ze-B5p"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="cellLabel" destination="Dao-ao-uaP" id="qps-ZF-mjc"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QTs-WC-930" userLabel="extendedNavBar" customClass="SQFilesExtendedNavBarView" customModule="oauthdemoapp_swift" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="64" width="600" height="45"/>
+                                <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="Q9f-O6-cio"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="otS-II-8Kw" firstAttribute="leading" secondItem="OXm-em-P1K" secondAttribute="leading" id="0ru-3j-rO0"/>
+                            <constraint firstAttribute="trailing" secondItem="otS-II-8Kw" secondAttribute="trailing" id="393-3t-jhI"/>
+                            <constraint firstItem="otS-II-8Kw" firstAttribute="top" secondItem="QTs-WC-930" secondAttribute="bottom" id="7yS-La-W1h"/>
+                            <constraint firstAttribute="trailing" secondItem="QTs-WC-930" secondAttribute="trailing" id="9HJ-yP-fLt"/>
+                            <constraint firstItem="QTs-WC-930" firstAttribute="top" secondItem="HBm-6g-B5a" secondAttribute="bottom" id="GgG-X6-7kT"/>
+                            <constraint firstItem="QTs-WC-930" firstAttribute="leading" secondItem="OXm-em-P1K" secondAttribute="leading" id="fZP-sO-hx6"/>
+                            <constraint firstItem="2Lo-xM-8NI" firstAttribute="top" secondItem="otS-II-8Kw" secondAttribute="bottom" id="vBn-uK-p5t"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="beD-gW-m64"/>
+                    <connections>
+                        <outlet property="extendedNavBarView" destination="QTs-WC-930" id="zED-6s-Vk5"/>
+                        <outlet property="tableView" destination="otS-II-8Kw" id="aDR-Rm-qaX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zDz-Sv-HdH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3843" y="296"/>
+        </scene>
+        <!--Files Sample Files View Controller-->
+        <scene sceneID="J7Z-0o-r4Y">
+            <objects>
+                <viewController id="V7o-NX-FCv" customClass="SQFilesSampleFilesViewController" customModule="oauthdemoapp_swift" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="CPC-yO-guR"/>
+                        <viewControllerLayoutGuide type="bottom" id="qPc-33-dbv"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="o5b-oG-ujP">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7nj-0j-fLh" userLabel="tableView">
+                                <rect key="frame" x="0.0" y="109" width="600" height="442"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="WIM-Rm-d3N" customClass="SQFilesTableCell" customModule="oauthdemoapp_swift" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WIM-Rm-d3N" id="Fi5-mN-HjE">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PUF-uv-KG1">
+                                                    <rect key="frame" x="8" y="14" width="579" height="16"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="PUF-uv-KG1" secondAttribute="trailing" constant="5" id="0P1-on-GcG"/>
+                                                <constraint firstAttribute="leadingMargin" secondItem="PUF-uv-KG1" secondAttribute="leading" id="M2Q-a3-E7y"/>
+                                                <constraint firstItem="PUF-uv-KG1" firstAttribute="centerY" secondItem="Fi5-mN-HjE" secondAttribute="centerY" id="qez-4N-Bgi"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="cellLabel" destination="PUF-uv-KG1" id="JaN-pf-ZEu"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JUM-I7-HQf" userLabel="extendedNavBar" customClass="SQFilesExtendedNavBarView" customModule="oauthdemoapp_swift" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="64" width="600" height="45"/>
+                                <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="T30-WC-wDG"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="JUM-I7-HQf" firstAttribute="leading" secondItem="o5b-oG-ujP" secondAttribute="leading" id="PTC-0g-N3i"/>
+                            <constraint firstAttribute="trailing" secondItem="JUM-I7-HQf" secondAttribute="trailing" id="Stz-cA-120"/>
+                            <constraint firstItem="7nj-0j-fLh" firstAttribute="top" secondItem="JUM-I7-HQf" secondAttribute="bottom" id="Yfx-lc-Rgy"/>
+                            <constraint firstItem="JUM-I7-HQf" firstAttribute="top" secondItem="CPC-yO-guR" secondAttribute="bottom" id="aqX-jf-1U6"/>
+                            <constraint firstAttribute="trailing" secondItem="7nj-0j-fLh" secondAttribute="trailing" id="fo6-td-Bjm"/>
+                            <constraint firstItem="qPc-33-dbv" firstAttribute="top" secondItem="7nj-0j-fLh" secondAttribute="bottom" id="mFw-2N-IIr"/>
+                            <constraint firstItem="7nj-0j-fLh" firstAttribute="leading" secondItem="o5b-oG-ujP" secondAttribute="leading" id="yXk-mx-aC2"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="dri-a2-XV3"/>
+                    <connections>
+                        <outlet property="extendedNavBarView" destination="JUM-I7-HQf" id="sh4-Yr-zcR"/>
+                        <outlet property="tableView" destination="7nj-0j-fLh" id="Lhy-Qq-Ihh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="V9m-Pr-slq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3843" y="977"/>
+        </scene>
+        <!--My Files-->
+        <scene sceneID="Riw-5x-BcU">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="wAz-0D-eoP" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="My Files" id="ctN-Wa-2iF"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="wt1-bD-Zin">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="KFq-Hc-at9" kind="relationship" relationship="rootViewController" id="jzj-uK-lJf"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JfS-or-cPi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3119" y="296"/>
+        </scene>
+        <!--Sample Files-->
+        <scene sceneID="PeP-zS-I4g">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="0tp-7v-3FC" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Sample Files" id="C81-La-std"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="SKy-a4-tsN">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="V7o-NX-FCv" kind="relationship" relationship="rootViewController" id="urB-JB-krj"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hwK-DP-2Sk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3119" y="977"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="icon_myfiles_color" width="48" height="32"/>
+        <image name="icon_samplefiles_color" width="48" height="32"/>
+    </resources>
+</document>
