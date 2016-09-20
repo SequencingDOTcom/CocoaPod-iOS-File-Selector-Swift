@@ -1,5 +1,5 @@
 //
-//  SQDemoDataCell.swift
+//  SQFilesTableCell.swift
 //  Copyright © 2015-2016 Sequencing.com. All rights reserved
 //
 

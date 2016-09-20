@@ -1,9 +1,6 @@
 //
 //  SQFilesSampleFilesViewController.swift
-//  oauthdemoapp-swift
-//
-//  Created by Bogdan Laukhin on 9/14/16.
-//  Copyright © 2016 ua.org. All rights reserved.
+//  Copyright © 2015-2016 Sequencing.com. All rights reserved
 //
 
 import UIKit

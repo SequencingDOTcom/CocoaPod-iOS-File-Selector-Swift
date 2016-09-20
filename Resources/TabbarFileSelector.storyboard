@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="fAn-jm-DKw">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -9,7 +10,7 @@
         <!--Files Intro View Controller-->
         <scene sceneID="SHV-NP-z2R">
             <objects>
-                <viewController id="N0L-Oi-G8Z" customClass="SQFilesIntroViewController" customModule="oauthdemoapp_swift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="N0L-Oi-G8Z" customClass="SQFilesIntroViewController" customModule="sequencing_file_selector_api_swift" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="sOC-tY-fp2"/>
                         <viewControllerLayoutGuide type="bottom" id="dnB-Zr-0Wd"/>
@@ -170,7 +171,7 @@ Do you want this app to analyze genetic data from one of your files or a sample 
         <!--Files My Files View Controller-->
         <scene sceneID="Ron-WE-zwe">
             <objects>
-                <viewController id="KFq-Hc-at9" customClass="SQFilesMyFilesViewController" customModule="oauthdemoapp_swift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="KFq-Hc-at9" customClass="SQFilesMyFilesViewController" customModule="sequencing_file_selector_api_swift" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HBm-6g-B5a"/>
                         <viewControllerLayoutGuide type="bottom" id="2Lo-xM-8NI"/>
@@ -183,7 +184,7 @@ Do you want this app to analyze genetic data from one of your files or a sample 
                                 <rect key="frame" x="0.0" y="109" width="600" height="442"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="2T8-H2-T7k" customClass="SQFilesTableCell" customModule="oauthdemoapp_swift" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="2T8-H2-T7k" customClass="SQFilesTableCell" customModule="sequencing_file_selector_api_swift">
                                         <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2T8-H2-T7k" id="Ajp-1B-eM7">
@@ -209,7 +210,7 @@ Do you want this app to analyze genetic data from one of your files or a sample 
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QTs-WC-930" userLabel="extendedNavBar" customClass="SQFilesExtendedNavBarView" customModule="oauthdemoapp_swift" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QTs-WC-930" userLabel="extendedNavBar" customClass="SQFilesExtendedNavBarView" customModule="master_plugin_swift" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="64" width="600" height="45"/>
                                 <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -241,7 +242,7 @@ Do you want this app to analyze genetic data from one of your files or a sample 
         <!--Files Sample Files View Controller-->
         <scene sceneID="J7Z-0o-r4Y">
             <objects>
-                <viewController id="V7o-NX-FCv" customClass="SQFilesSampleFilesViewController" customModule="oauthdemoapp_swift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="V7o-NX-FCv" customClass="SQFilesSampleFilesViewController" customModule="sequencing_file_selector_api_swift" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="CPC-yO-guR"/>
                         <viewControllerLayoutGuide type="bottom" id="qPc-33-dbv"/>
@@ -254,7 +255,7 @@ Do you want this app to analyze genetic data from one of your files or a sample 
                                 <rect key="frame" x="0.0" y="109" width="600" height="442"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="WIM-Rm-d3N" customClass="SQFilesTableCell" customModule="oauthdemoapp_swift" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="WIM-Rm-d3N" customClass="SQFilesTableCell" customModule="sequencing_file_selector_api_swift">
                                         <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WIM-Rm-d3N" id="Fi5-mN-HjE">
@@ -280,7 +281,7 @@ Do you want this app to analyze genetic data from one of your files or a sample 
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JUM-I7-HQf" userLabel="extendedNavBar" customClass="SQFilesExtendedNavBarView" customModule="oauthdemoapp_swift" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JUM-I7-HQf" userLabel="extendedNavBar" customClass="SQFilesExtendedNavBarView" customModule="master_plugin_swift" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="64" width="600" height="45"/>
                                 <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
