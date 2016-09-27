@@ -1,12 +1,12 @@
-# File Selector CocoPod plugin for adding Squencing.com's Real-Time Personalization technology to iOS apps coded in Swift
+# File Selector CocoPod plugin for adding Sequencing.com's Real-Time Personalization technology to iOS apps coded in Swift
 =========================================
-This repo contains the plug-n-play CocoPod for implementing a customizable File Selector so your app can access files stored securely at [Sequencing.com](https://sequencing.com/). 
+This repo contains the plug-n-play CocoaPods plugin for implementing a customizable File Selector so your app can access files stored securely at [Sequencing.com](https://sequencing.com/). 
 
-This CocoPod can be used to quickly add a File Selector to your app. By adding this File Selector to your app, you're app user will be able to select a file stored securely in the user's Sequencing.com account. Your app will then be able to use the genetic data in this file to provide the user with Real-Time Personalization.
+This CocoaPods plugin can be used to quickly add a File Selector to your app. By adding this File Selector to your app, you're app user will be able to select a file stored securely in the user's Sequencing.com account. Your app will then be able to use the genetic data in this file to provide the user with Real-Time Personalization.
 
 While the File Selector works out-of-the-box, it is also fully customizable.
 
-A 'Master CocoPod Plugin' is also available. The Master Plugin contains a customizable, end-to-end solution that quickly adds all necessary code to your app for Sequencing.com's Real-Time Personalization. 
+A 'Master CocoaPods Plugin' is also available. The Master Plugin contains a customizable, end-to-end solution that quickly adds all necessary code to your app for Sequencing.com's Real-Time Personalization. 
 
 Once the Master Plugin is added to your app all you'll need to do is:
 
@@ -15,6 +15,14 @@ Once the Master Plugin is added to your app all you'll need to do is:
 3. configure your app based on each [app chain's possible responses](https://sequencing.com/app-chains/)
 
 To code Real-Time Personalization technology into apps, developers may [register for a free account](https://sequencing.com/user/register/) at Sequencing.com. App development with RTP is always free.
+
+Contents
+=========================================
+* Related repos
+* CocoaPods plugin integration
+* Resources
+* Maintainers
+* Contribute
 
 Related repos
 =========================================
@@ -42,109 +50,248 @@ File Selector Code
 * [Java (Spring)](https://github.com/SequencingDOTcom/oAuth2-code-and-demo/tree/master/java-spring)
 * [.NET/C#](https://github.com/SequencingDOTcom/oAuth2-code-and-demo/tree/master/dot-net-cs)
 
-Contents
-=========================================
-* Related repos
-* Implementation
-* App chains
-* Authentication flow
-* Steps
-* Resources
-* Maintainers
-* Contribute
-
-Implementation
+CocoaPods plugin integration
 ======================================
-To implement oAuth2 authentication for your app:
+Please follow this guide to install File Selector module in your existed or new project.
 
-1) [Register](https://sequencing.com/user/register/) for a free account
+### Step 1: Install OAuth module and File Selector modules
 
-2) Add [Sequencing.com's oAuth2 code](https://github.com/SequencingDOTcom/oAuth2-code-and-demo) from this repo to your app
+* see [CocoaPods guides](https://guides.cocoapods.org/using/using-cocoapods.html)
 
-3) [Generate an OAuth2 secret](https://sequencing.com/api-secret-generator) and insert the secret into the OAuth2 code
+* reference to OAuth CocoaPods plugin: [OAuth plugin Swift (CocoaPods plugin)](https://github.com/SequencingDOTcom/CocoaPod-iOS-OAuth-Swift)
 
-Once OAuth2 authentication is implemented, select one or more [app chains](https://sequencing.com/app-chains) that will provide information you can use to personalize your app.
+* File selector module prepared as separate module, but it depends on a Token object from OAuth plugin. File selector can execute request to server for files with token object only. Thus you need 2 modules to be installed and set up: ```OAuth``` and ```File Selector``` modules
 
-App chains
-======================================
-Search and find app chains -> https://sequencing.com/app-chains/
-
-Each app chain is composed of 
-* an **API request** to Sequencing.com
- * this request is secured using oAuth2
-* analysis of the app user's genes
- * each app chain analyzes a specific trait or condition
- * there are thousands of app chains to choose from
- * all analysis occurs in real-time at Sequencing.com
-* an **API response** to your app
- * the information provided by the response allows your app to tailor itself to the app user based on the user's genes.
- * the documentation for each app chain provides a list of all possible API responses. The response for most app chains are simply 'Yes' or 'No'.
-
-Example
-* App Chain: It is very important for this person's health to apply sunscreen with SPF +30 whenever it is sunny or even partly sunny.
-* Possible responses: Yes, No, Insufficient Data, Error
-
-While there are already app chains to personalize most apps, if you need something but don't see an app chain for it, tell us! (ie email us: gittaca@sequencing.com).
-
-Authentication flow
-======================================
-Sequencing.com uses standard OAuth approach which enables applications to obtain limited access to user accounts on an HTTP service from 3rd party applications without exposing the user's password. OAuth acts as an intermediary on behalf of the end user, providing the service with an access token that authorizes specific account information to be shared.
-
-![Authentication sequence diagram]
-(https://github.com/SequencingDOTcom/oAuth2-code-and-demo/blob/master/screenshots/oauth_activity.png)
+* create a new project in Xcode
+	
+* create Podfile in your project directory: 
+	```
+	$ pod init
+	```
+		
+* specify following parameters in Podfile: 
+	```
+	pod 'sequencing-oauth-api-swift', '~> 1.0.3'
+	pod 'sequencing-file-selector-api-swift', '~> 1.0.1'
+	```		
+		
+* install the dependency in your project: 
+	```
+	$ pod install
+	```
+		
+* always open the Xcode workspace instead of the project file: 
+	```
+	$ open *.xcworkspace
+	```
 
 
-## Steps
+### Step 2: Set up OAuth plugin
 
-### Step 1: Authorization Code Link
+* reference to OAuth CocoaPods plugin: [OAuth plugin Swift (CocoaPods plugin)](https://github.com/SequencingDOTcom/CocoaPod-iOS-OAuth-Swift)
 
-First, the user is given an authorization code link that looks like the following:
 
-```
-https://sequencing.com/oauth2/authorize?redirect_uri=REDIRECT_URL&response_type=code&state=STATE&client_id=CLIENT_ID&scope=SCOPES
-```
 
-Here is an explanation of the link components:
+### Step 3: Set up file selector UI
 
-* https://sequencing.com/oauth2/authorize: the API authorization endpoint
-* client_id=CLIENT_ID: the application's client ID (how the API identifies the application)
-* redirect_uri=REDIRECT_URL: where the service redirects the user-agent after an authorization code is granted
-* response_type=code: specifies that your application is requesting an authorization code grant
-* scope=CODES: specifies the level of access that the application is requesting
+* add "Storyboard Reference" in your Main.storyboard
+	* open your main storyboard
+	* add "Storyboard Reference" object
+	* select added "Storyboard Reference"
+	* open Utilities > Atributes inspector
+	* select ```TabbarFileSelector``` in Storyboard dropdown
+		
+* add segue from your ViewController to created Storyboard Reference
+	* open Utilities > Atributes inspector
+	* name this segue as ```GET_FILES``` in Identifier field
+	* set Kind as ```Present Modally```
+		
+* add all resources of ```File Selector``` plugin into your project Bundle Resources:
+	* select project name
+	* select project target
+	* open ```Build Phases``` tab
+	* expand ```Copy Bundle Resources``` phase
+	* click ```Add Items``` button ("+" icon)
+	* click ```Add Other``` button
+	* open your project folder
+	* open ```Pods``` subfolder
+	* open ```sequencing-oauth-api-swift``` subfolder
+	* open ```Resources``` subfolder 
+	
+	* add ```TabbarFileSelector.storyboard``` storyboard
+	* add ```SQFilesPopoverInfoViewController.xib``` popover nib
+	* add ```SQFilesPopoverMyFilesViewController.xib``` popover nib
+	* add ```Images.xcassets``` xcassets
+	
+	
+### Step 4: Set up file selector plugin in code
+		
+* add import: 
+	```
+	import sequencing_file_selector_api_swift
+	```
 
-![login dialog](https://github.com/SequencingDOTcom/oAuth2-code-and-demo/blob/master/screenshots/oauth_auth.png)
+* subscribe your class to file selector protocol: 
+	```
+	SQFileSelectorProtocolDelegate
+	```
+		
+* subscribe your class as handler/delegate for selected file in file selector: 
+	```
+	SQFilesAPI.instance.selectedFileDelegate = self
+	```
+		
+* implement "handleFileSelected" method from ```SQFileSelectorProtocolDelegate``` protocol
+	```
+	func handleFileSelected(file: NSDictionary) -> Void {
+		// your code here
+    }
+	```
 
-### Step 2: User Authorizes Application
+* implement optional "closeButtonPressed" method from protocol if needed
+	```
+	func closeButtonPressed() -> Void {
+        // your code here
+    }
+	```
+	
+	
+### Step 5: Use file selector 
 
-When the user clicks the link, they must first log in to the service, to authenticate their identity (unless they are already logged in). Then they will be prompted by the service to authorize or deny the application access to their account. Here is an example authorize application prompt
+* set up some button for getting/viewing files for logged in user, and specify delegate method for this button
+	
+* specify segue ID constant for file selector UI
+	```
+	let FILES_CONTROLLER_SEGUE_ID = "GET_FILES"
+	```	
+		
+* you can load/get files, list of my files and list of sample files, via ```withToken: loadFiles:``` method (via ```SQFilesAPI``` class with shared instance init access).
+	
+	pay attention, you need to pass on the String value of ```token.accessToken``` object as a parameter for this method:
+	```
+	SQFilesAPI.instance.loadFilesWithToken(self.token!.accessToken, success: { (success) in
+		dispatch_async(dispatch_get_main_queue()) {
+			// your code here
+		}
+    })
+	```
+		
+	```loadFilesWithToken``` method will return a Bool value with ```true` if files were successfully loaded or ```false``` if there were any problem. You need to manage this in your code
+		
+* if files were loaded successfully you can now open/show File Selector in UI. You can do it by calling File Selector view via ```performSegueWithIdentifier``` method:
+	```
+	self.performSegueWithIdentifier(self.FILES_CONTROLLER_SEGUE_ID, sender: nil)
+	```
+	
+	while opening File Selector in UI you can set `Close` button to be present if you need
+	```
+	SQFilesAPI.instance.closeButton = true
+	```
+	
+* when user selects any file and clicks on "Continue" button in File Selector UI - ```handleFileSelected``` method from ```SQFileSelectorProtocolDelegate``` protocol will be called then
+	Selected file will be passed on as a parameter. In this method you can handle this selected file
+	
+* each file is a NSDictionary object with following keys and values format:
+	
+	key name | type | description
+	------------- | ------------- | ------------- 
+	DateAdded | String | date file was added
+	Ext | String | file extension
+	FileCategory | String | file category: Community, Uploaded, FromApps, Altruist
+	FileSubType | String | file subtype
+	FileType | String | file type
+	FriendlyDesc1 | String | person name for sample files
+	FriendlyDesc2 | String | person description for sample files
+	Id | String | file ID
+	Name | String | file name
+	Population | String | 
+	Sex | String |	the sex
 
-![grant dialog](https://github.com/SequencingDOTcom/oAuth2-code-and-demo/blob/master/screenshots/oauth_grant.png)
 
-### Step 3: Application Receives Authorization Code
+### Step 6: Examples 
 
-If the user clicks "Authorize Application", the service redirects the user-agent to the application redirect URI, which was specified during the client registration, along with an authorization code. The redirect would look something like this (assuming the application is "php-oauth-demo.sequencing.com"):
+* example of ```File Selector - Intro page```
 
-```
-https://php-oauth-demo.sequencing.com/index.php?code=AUTHORIZATION_CODE
-```
+	![intro page](https://github.com/SequencingDOTcom/CocoaPod-iOS-File-Selector-ObjectiveC/blob/master/Screenshots/fileSelector_introPage.png)
 
-### Step 4: Application Requests Access Token
 
-The application requests an access token from the API, by passing the authorization code along with authentication details, including the client secret, to the API token endpoint. Here is an example POST request to Sequencing.com token endpoint:
+* example of ```File Selector - My Files```
 
-```
-https://sequencing.com/oauth2/token
-```
+	![my files](https://github.com/SequencingDOTcom/CocoaPod-iOS-File-Selector-ObjectiveC/blob/master/Screenshots/fileSelector_myFiles2.png)
 
-Following POST parameters have to be sent
 
-* grant_type='authorization_code'
-* code=AUTHORIZATION_CODE (where AUTHORIZATION_CODE is a code acquired in a "code" parameter in the result of redirect from sequencing.com)
-* redirect_uri=REDIRECT_URL (where REDIRECT_URL is the same URL as the one used in step 1)
+* example of ```Sample Files```
 
-### Step 5: Application Receives Access Token
+	![sample files](https://github.com/SequencingDOTcom/CocoaPod-iOS-File-Selector-ObjectiveC/blob/master/Screenshots/fileSelector_sampleFiles2.png)
 
-If the authorization is valid, the API will send a JSON response containing the access token  to the application.
+	
+* example of selected file
+
+	![selected file](https://github.com/SequencingDOTcom/CocoaPod-iOS-File-Selector-ObjectiveC/blob/master/Screenshots/fileSelector_sampleFiles2selected.png)
+
+	
+* example of ```Select File``` button
+	you can add simple button via storyboard
+	
+	
+* example of delegate method for select file button
+	```
+	@IBAction func loadFilesButtonPressed(sender: AnyObject) {
+        self.view.userInteractionEnabled = false
+        self.startActivityIndicatorWithTitle("Loading Files")
+        if self.token != nil {
+            SQFilesAPI.instance.loadFilesWithToken(self.token!.accessToken, success: { (success) in
+                dispatch_async(self.kMainQueue) {
+                    if success {
+                        self.stopActivityIndicator()
+                        self.view.userInteractionEnabled = true
+                        self.performSegueWithIdentifier(self.FILES_CONTROLLER_SEGUE_ID, sender: nil)
+                        
+                    } else {
+                        self.stopActivityIndicator()
+                        self.view.userInteractionEnabled = true
+                        self.showAlertWithMessage("Sorry, can't load genetic files")
+                    }
+                }
+            })
+        } else {
+        	self.stopActivityIndicator()
+            self.showAlertWithMessage("Sorry, can't load genetic files > token is empty")
+        }
+    }
+	```	
+
+
+* example of ```handleFileSelected``` method
+	```
+	func handleFileSelected(file: NSDictionary) -> Void {
+        self.dismissViewControllerAnimated(true, completion: nil)
+        print(file)
+        if file.allKeys.count > 0 {
+            dispatch_async(self.kMainQueue) {
+                self.stopActivityIndicator()
+                self.view.userInteractionEnabled = true
+                self.selectedFile = file
+            }
+        } else {
+            dispatch_async(kMainQueue, {
+                self.stopActivityIndicator()
+                self.view.userInteractionEnabled = true
+                self.showAlertWithMessage("Sorry, can't load genetic files")
+            })
+        }
+    }
+	```
+
+* example of ```closeButtonPressed``` method
+	```
+	func closeButtonPressed() -> Void {
+		self.stopActivityIndicator()
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+	```
+
+
 
 Resources
 ======================================
