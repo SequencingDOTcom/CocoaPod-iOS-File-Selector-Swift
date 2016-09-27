@@ -188,8 +188,7 @@ Please follow this guide to install File Selector module in your existed or new 
 	SQFilesAPI.instance.closeButton = true
 	```
 	
-* when user selects any file and clicks on "Continue" button in File Selector UI - ```handleFileSelected``` method from ```SQFileSelectorProtocolDelegate``` protocol will be called then
-	Selected file will be passed on as a parameter. In this method you can handle this selected file
+* when user selects any file and clicks on "Continue" button in File Selector UI - ```handleFileSelected``` method from ```SQFileSelectorProtocolDelegate``` protocol will be called then. Selected file will be passed on as a parameter. In this method you can handle this selected file
 	
 * each file is a NSDictionary object with following keys and values format:
 	
@@ -230,8 +229,7 @@ Please follow this guide to install File Selector module in your existed or new 
 	![selected file](https://github.com/SequencingDOTcom/CocoaPod-iOS-File-Selector-ObjectiveC/blob/master/Screenshots/fileSelector_sampleFiles2selected.png)
 
 	
-* example of ```Select File``` button
-	you can add simple button via storyboard
+* example of ```Select File``` button - you can add simple button via storyboard
 	
 	
 * example of delegate method for select file button
