@@ -1,38 +1,39 @@
 //
-//  SQFilesAPI.swift
-//  Copyright © 2015-2016 Sequencing.com. All rights reserved
+//  SQAPI.swift
+//  Copyright © 2017 Sequencing.com. All rights reserved
 //
+
 
 import Foundation
 
 
-@objc public protocol SQFileSelectorProtocolDelegate: class {
-    func handleFileSelected(file: NSDictionary)
+// file selector protocol
+@objc public protocol SQFileSelectorProtocol: class {
+    func handleFileSelected(_ file: NSDictionary)
     
-    optional func closeButtonPressed()
+    @objc optional func closeButtonPressed()
 }
 
 
 
-public class SQFilesAPI: NSObject {
+// file selector api class
+open class SQFilesAPI: NSObject {
     
+    weak var selectedFileDelegate: SQFileSelectorProtocol?
     
-    public weak var selectedFileDelegate: SQFileSelectorProtocolDelegate?
-    
-    public var closeButton:    Bool = false
-    public var selectedFileID: NSString?
-    public var videoFileName:  NSString?
-    public var accessToken = NSString()
-    
+    var closeButton: Bool = false
+    var selectedFileID: NSString?
+    var videoFileName: NSString?
+    var accessToken = NSString()
     
     
     // MARK: - Initializer
-    public static let instance = SQFilesAPI()
+    open static let instance = SQFilesAPI()
     
     
     
     // MARK: - API methods
-    public func loadFilesWithToken(accessToken: NSString, success: (success: Bool) -> Void) -> Void {
+    open func loadFilesWithToken(_ accessToken: NSString, success: @escaping (_ success: Bool) -> Void) -> Void {
         self.accessToken = accessToken
         
         self.loadFilesFromServer { (files) in
@@ -41,29 +42,29 @@ public class SQFilesAPI: NSObject {
                     if mySectionsArray != nil || sampleSectionsArray != nil  {
                         SQFilesContainer.instance.mySectionsArray = mySectionsArray
                         SQFilesContainer.instance.sampleSectionsArray = sampleSectionsArray
-                        success(success: true)
+                        success(true)
                         
                     } else {
-                        success(success: false)
+                        success(false)
                     }
                 })
             } else {
-                success(success: false)
+                success(false)
             }
         }
     }
     
     
     
-    func loadFilesFromServer(files: (files: NSArray?) -> Void) -> Void {
+    func loadFilesFromServer(_ files: @escaping (_ files: NSArray?) -> Void) -> Void {
         SQFilesServerManager.instance.getForFilesWithToken(self.accessToken as String) { (filesArray, error) in
             if filesArray != nil {
-                print(filesArray)
-                files(files: filesArray)
+                print(filesArray as NSArray!)
+                files(filesArray)
                 
             } else if error != nil {
-                print(error?.localizedDescription)
-                files(files: nil)
+                print(error!.localizedDescription)
+                files(nil)
             }
         }
     }

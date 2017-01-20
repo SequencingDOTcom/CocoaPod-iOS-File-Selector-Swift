@@ -1,7 +1,8 @@
 //
 //  SQFilesPopoverMyFilesViewController.swift
-//  Copyright © 2015-2016 Sequencing.com. All rights reserved
+//  Copyright © 2017 Sequencing.com. All rights reserved
 //
+
 
 import UIKit
 
@@ -9,50 +10,32 @@ import UIKit
 class SQFilesPopoverMyFilesViewController: UIViewController {
     
     
-    class func heightForPopoverWidth(width: CGFloat) -> CGFloat {
+    class func heightForPopoverWidth(_ width: CGFloat) -> CGFloat {
         let text: NSString = "Your Sequencing.com account doesn't appear to have any genetic data.\n\nPlease go to the Upload Center at Sequencing.com to upload your genetic data. You'll then be able to connect this app with your genetic data.\n\nUntil then, please use one of the following sample files."
         
-        let font = UIFont.systemFontOfSize(14)
+        let font = UIFont.systemFont(ofSize: 14)
         let shadow = NSShadow()
         shadow.shadowOffset = CGSize(width: 0, height: -1)
         shadow.shadowBlurRadius = 0.5
         
         let paragraph = NSMutableParagraphStyle()
-        paragraph.lineBreakMode = NSLineBreakMode.ByWordWrapping
-        paragraph.alignment = NSTextAlignment.Left
+        paragraph.lineBreakMode = NSLineBreakMode.byWordWrapping
+        paragraph.alignment = NSTextAlignment.left
         
-        let size = CGSize(width: width - 30, height:CGFloat.max)
-        let options: NSStringDrawingOptions = [.UsesLineFragmentOrigin, .UsesFontLeading]
+        let size = CGSize(width: width - 30, height:CGFloat.greatestFiniteMagnitude)
+        let options: NSStringDrawingOptions = [.usesLineFragmentOrigin, .usesFontLeading]
         
-        let rect: CGRect = text.boundingRectWithSize(size,
-                                                     options: options,
-                                                     attributes: [NSFontAttributeName: font, NSParagraphStyleAttributeName: paragraph, NSShadowAttributeName: shadow],
-                                                     context: nil)
-        
-        return CGRectGetHeight(rect) + 40
+        let rect: CGRect = text.boundingRect(with: size,
+                                             options: options,
+                                             attributes: [NSFontAttributeName: font, NSParagraphStyleAttributeName: paragraph, NSShadowAttributeName: shadow],
+                                             context: nil)
+        return rect.height + 40
     }
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

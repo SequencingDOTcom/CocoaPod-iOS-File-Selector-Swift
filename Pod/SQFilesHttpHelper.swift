@@ -1,16 +1,16 @@
 //
 //  SQFilesHttpHelper.swift
-//  Copyright © 2015-2016 Sequencing.com. All rights reserved
+//  Copyright © 2017 Sequencing.com. All rights reserved
 //
+
 
 import Foundation
 
 
-typealias FilesHttpCallback = (responseText: NSString?, response: NSURLResponse?, error: NSError?) -> Void
+typealias FilesHttpCallback = (_ responseText: NSString?, _ response: URLResponse?, _ error: NSError?) -> Void
 
 
 class SQFilesHttpHelper: NSObject {
-    
     
     // MARK: - Initializer
     static let instance = SQFilesHttpHelper()
@@ -18,7 +18,7 @@ class SQFilesHttpHelper: NSObject {
     
     // MARK: - execHttpRequestWithUrl
     func execHttpRequestWithUrl(
-        url: String,
+        _ url: String,
         method: String,
         headers: NSDictionary?,
         username: String?,
@@ -26,34 +26,38 @@ class SQFilesHttpHelper: NSObject {
         token: String?,
         authScope: String,
         parameters: Dictionary<String, String>?,
-        callback: FilesHttpCallback) -> Void {
+        callback: @escaping FilesHttpCallback) -> Void {
         
         // create request by url
-        let urlRequest = NSURL(string: url)
-        let request = NSMutableURLRequest(URL: urlRequest!)
+        let urlRequest = URL(string: url)
+        let request = NSMutableURLRequest(url: urlRequest!)
         
         // set request method
-        request.HTTPMethod = method
+        request.httpMethod = method
         
         // add headers (if any) to request HTTPHeader
         if headers != nil {
             for key in headers!.allKeys {
                 let headerKey = key as! String
-                if let headerValue = headers?.valueForKey(headerKey) as! String? {
+                if let headerValue = headers?.value(forKey: headerKey) as! String? {
                     request.addValue(headerValue, forHTTPHeaderField: headerKey)
                 }
             }
         }
         
         // setting request authscope (for Authorization httpHeaderField) - either for Basic or for Bearer
-        if authScope == "Basic" {
-            if let stringUsernameAndPassword: String! = username! + ":" + password! {
-                let authData: NSData? = stringUsernameAndPassword.dataUsingEncoding(NSASCIIStringEncoding)
-                if let authDataEncoded = authData?.base64EncodedStringWithOptions([]) {
+        if authScope == "Basic" && username != nil && password != nil {
+            
+            let stringUsernameAndPassword = (username! + ":" + password!) as String
+            let authData = stringUsernameAndPassword.data(using: .utf8)
+            
+            if authData != nil {
+                if let authDataEncoded = authData?.base64EncodedString(options: []) {
                     let authValue = String(format: "%@ %@", authScope, authDataEncoded)
                     request.setValue(authValue, forHTTPHeaderField: "Authorization")
                 }
             }
+            
         } else if authScope == "Bearer" {
             if token != nil {
                 let authValue = String(format: "%@ %@", authScope, token!)
@@ -64,27 +68,30 @@ class SQFilesHttpHelper: NSObject {
         // adding parameters to request HTTPBody
         if parameters != nil {
             let parametersString = self.urlEncodedString(parameters!)
-            request.HTTPBody = parametersString.dataUsingEncoding(NSUTF8StringEncoding)
+            request.httpBody = parametersString.data(using: String.Encoding.utf8)
         }
         
         request.timeoutInterval = 15
-        request.HTTPShouldHandleCookies = false
+        request.httpShouldHandleCookies = false
         
-        let dataTask: NSURLSessionDataTask = NSURLSession.sharedSession().dataTaskWithRequest(request) { (data, serverResponse, serverError) -> Void in
+        let dataTask: URLSessionDataTask = URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { (data, serverResponse, serverError) -> Void in
+            
             if data != nil {
-                if let dataString = NSString(data: data!, encoding: NSUTF8StringEncoding) {
-                    callback(responseText: dataString, response: nil, error: nil)
+                if let dataString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue) {
+                    // callback(responseText: dataString, response: nil, error: nil)
+                    callback(dataString, nil, nil)
                 }
             }
             if serverError != nil {
-                callback(responseText: nil, response: serverResponse, error: serverError)
+                // callback(responseText: nil, response: serverResponse, error: serverError)
+                callback(nil, serverResponse, serverError as NSError!)
             }
-        }
+        }) 
         dataTask.resume()
     }
     
     
-    func urlEncodedString(dict: Dictionary<String, String>) -> String {
+    func urlEncodedString(_ dict: Dictionary<String, String>) -> String {
         var parts = [String]()
         for key in dict.keys {
             if let value = dict[key] {
@@ -92,13 +99,13 @@ class SQFilesHttpHelper: NSObject {
                 parts.append(part)
             }
         }
-        let joinedString: String = parts.joinWithSeparator("&")
+        let joinedString: String = parts.joined(separator: "&")
         return joinedString
     }
     
     
-    func urlEncode(string: String) -> String {
-        if let encodedString = string.stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet()) {
+    func urlEncode(_ string: String) -> String {
+        if let encodedString = string.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) {
             return encodedString
         } else {
             return ""

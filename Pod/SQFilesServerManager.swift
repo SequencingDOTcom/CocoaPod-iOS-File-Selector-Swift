@@ -1,7 +1,8 @@
 //
 //  SQFilesServerManager.swift
-//  Copyright © 2015-2016 Sequencing.com. All rights reserved
+//  Copyright © 2017 Sequencing.com. All rights reserved
 //
+
 
 import Foundation
 
@@ -20,9 +21,10 @@ class SQFilesServerManager: NSObject {
     
     
     // MARK: - Genetic files method
-    func getForFilesWithToken(accessToken: String, completion: (filesArray: NSArray?, error: NSError?) -> Void ) -> Void {
+    func getForFilesWithToken(_ accessToken: String, completion: @escaping (_ filesArray: NSArray?, _ error: NSError?) -> Void ) -> Void {
         
         let apiUrlForFiles: String = self.apiURL + self.filesPath
+        
         SQFilesHttpHelper.instance.execHttpRequestWithUrl(
             apiUrlForFiles,
             method: "GET",
@@ -34,25 +36,36 @@ class SQFilesServerManager: NSObject {
             parameters: nil) { (responseText, response, error) in
                 
                 if responseText != nil {
-                    let jsonData = responseText?.dataUsingEncoding(NSUTF8StringEncoding)
-                    do {
-                        if let jsonParsed = try NSJSONSerialization.JSONObjectWithData(jsonData!, options: []) as? NSArray {
-                            completion(filesArray: jsonParsed, error: nil)
-                        }
-                    } catch let error as NSError {
-                        print("json error" + error.localizedDescription)
-                        completion(filesArray: nil, error: error)
-                    }
                     
+                    let tempResponseText = responseText! as NSString
+                    
+                    if tempResponseText.lowercased.range(of: "exception") != nil ||
+                       tempResponseText.lowercased.range(of: "invalid") != nil ||
+                       tempResponseText.lowercased.range(of: "error") != nil {
+                        
+                        print("error: " + (tempResponseText as String!))
+                        completion(nil, nil)
+                        
+                    } else {
+                        
+                        let jsonData = responseText?.data(using: String.Encoding.utf8.rawValue)
+                        do {
+                            if let jsonParsed = try JSONSerialization.jsonObject(with: jsonData!, options: []) as? NSArray {
+                                completion(jsonParsed, nil)
+                            }
+                        } catch let error as NSError {
+                            print("json error" + error.localizedDescription)
+                            completion(nil, error)
+                        }
+                        
+                    }
                 } else if error != nil {
                     print("json error" + error!.localizedDescription)
-                    print("server response: ")
-                    print(response)
-                    completion(filesArray: nil, error: error)
+                    completion(nil, error)
                 }
         }
-        
     }
+    
     
     
 }

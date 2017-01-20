@@ -1,7 +1,8 @@
 //
 //  SQFilesSectionInfo.swift
-//  Copyright © 2015-2016 Sequencing.com. All rights reserved
+//  Copyright © 2017 Sequencing.com. All rights reserved
 //
+
 
 import Foundation
 import UIKit
@@ -24,21 +25,21 @@ class SQFilesSectionInfo: NSObject {
     
     
     // MARK: - Insert objects
-    func addFile(file: NSDictionary, WithHeight height:CGFloat) -> Void {
-        filesArray.addObject(file)
-        self.insertObject(height, InRowHeightsAtIndex: filesArray.count - 1)
+    func addFile(_ file: NSDictionary, WithHeight height:CGFloat) -> Void {
+        filesArray.add(file)
+        self.insertObject(height as AnyObject, InRowHeightsAtIndex: filesArray.count - 1)
     }
     
     
-    func insertObject(object: AnyObject, InRowHeightsAtIndex index: Int) -> Void {
-        rowHeights.insertObject(object, atIndex: index)
+    func insertObject(_ object: AnyObject, InRowHeightsAtIndex index: Int) -> Void {
+        rowHeights.insert(object, at: index)
     }
     
     
     
     // MARK: - Return row height
-    func objectInRowHeightsAtIndex(index: Int) -> AnyObject {
-        return rowHeights.objectAtIndex(index)
+    func objectInRowHeightsAtIndex(_ index: Int) -> AnyObject {
+        return rowHeights.object(at: index) as AnyObject
     }
     
 

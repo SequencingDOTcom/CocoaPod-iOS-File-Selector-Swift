@@ -1,13 +1,14 @@
 //
 //  SQFilesHelper.swift
-//  Copyright © 2015-2016 Sequencing.com. All rights reserved
+//  Copyright © 2017 Sequencing.com. All rights reserved
 //
+
 
 import Foundation
 import UIKit
 
 
-typealias FilesCallback = (mySectionsArray: NSMutableArray?, sampleSectionsArray: NSMutableArray?) -> Void
+typealias FilesCallback = (_ mySectionsArray: NSMutableArray?, _ sampleSectionsArray: NSMutableArray?) -> Void
 
 
 let kSAMPLE_ALL_FILES_CATEGORY_NAME: String     = "All"
@@ -27,6 +28,7 @@ let kAPPLICATION_FILES_CATEGORY_TAG: String     = "FromApps"
 let kALTRUIST_FILES_CATEGORY_TAG: String        = "AllWithAltruist"
 
 
+
 class SQFilesHelper: NSObject {
     
     // MARK: - Initializer
@@ -35,7 +37,7 @@ class SQFilesHelper: NSObject {
     
     
     // MARK: - Parse Files Array
-    func parseFilesMainArray(filesMainArray:NSArray, WithCompletion completion:FilesCallback) -> Void {
+    func parseFilesMainArray(_ filesMainArray:NSArray, WithCompletion completion:FilesCallback) -> Void {
         // For each category/section, set up a corresponding SectionInfo object to contain the category name
         // also list of files and height for each row
         let sampleInfoArray = NSMutableArray()  // array for section info for sample files
@@ -57,77 +59,87 @@ class SQFilesHelper: NSObject {
                                    kALTRUIST_FILES_CATEGORY_TAG]
         
         for object in filesMainArray {
-            if object.isKindOfClass(NSDictionary) {
+            if object is NSDictionary {
+                
                 let tempFile = object as! NSDictionary
-                let tempCategoryName = tempFile.objectForKey("FileCategory") as! String
-                let category: Int = categories.indexOfObject(tempCategoryName)
+                let tempCategoryName = tempFile.object(forKey: "FileCategory") as! String
+                let category: Int = categories.index(of: tempCategoryName)
                 
                 switch category {
-                    case 0:     // Sample Files Category
-                        self.addFile(tempFile, IntoSection: sectionSampleAll)
-                        let sex = tempFile.objectForKey("Sex") as! NSString?
+                    
+                case 0:     // Sample Files Category
+                    if tempFile.allKeys.contains(where: { $0 as! String == "Sex"}) {
+                        
+                        let sex = tempFile.object(forKey: "Sex") as! NSString?
                         if sex != nil {
-                            if sex!.lowercaseString.rangeOfString("female") != nil  {
+                            
+                            self.addFile(tempFile, IntoSection: sectionSampleAll)
+                            if sex!.lowercased.range(of: "female") != nil  {
                                 self.addFile(tempFile, IntoSection: sectionSampleWomen)
-                            } else if sex!.lowercaseString.rangeOfString("male") != nil {
+                                
+                            } else if sex!.lowercased.range(of: "male") != nil {
                                 self.addFile(tempFile, IntoSection: sectionSampleMen)
                             }
                         }
+                    }
                     
-                    case 1:     // Uploaded Files Category
-                        self.addFile(tempFile, IntoSection: sectionUploaded)
                     
-                    case 2:     // Shared Files Category
-                        self.addFile(tempFile, IntoSection: sectionShared)
+                case 1:     // Uploaded Files Category
+                    self.addFile(tempFile, IntoSection: sectionUploaded)
                     
-                    case 3:     // From Apps Files Category
-                        self.addFile(tempFile, IntoSection: sectionFromApps)
+                case 2:     // Shared Files Category
+                    self.addFile(tempFile, IntoSection: sectionShared)
                     
-                    case 4:     // Altruist Files Category
-                        self.addFile(tempFile, IntoSection: sectionAltruist)
+                case 3:     // From Apps Files Category
+                    self.addFile(tempFile, IntoSection: sectionFromApps)
                     
-                    default:
-                        print("file category not found")
+                case 4:     // Altruist Files Category
+                    self.addFile(tempFile, IntoSection: sectionAltruist)
+                    
+                default:    print("file category not found")
                 } // end of switch
             }
         } // end of cycle
         
         // saving sections/categories to main Sample Array
         if sectionSampleAll.filesArray.count > 0 {
-            sampleInfoArray.addObject(sectionSampleAll)
+            sampleInfoArray.add(sectionSampleAll)
         }
         if sectionSampleMen.filesArray.count > 0 {
-            sampleInfoArray.addObject(sectionSampleMen)
+            sampleInfoArray.add(sectionSampleMen)
         }
         if sectionSampleWomen.filesArray.count > 0 {
-            sampleInfoArray.addObject(sectionSampleWomen)
+            sampleInfoArray.add(sectionSampleWomen)
         }
         
         // saving sections/categories to main My Files Array
         if sectionUploaded.filesArray.count > 0 {
-            myInfoArray.addObject(sectionUploaded)
+            myInfoArray.add(sectionUploaded)
         }
         if sectionShared.filesArray.count > 0 {
-            myInfoArray.addObject(sectionShared)
+            myInfoArray.add(sectionShared)
         }
         if sectionFromApps.filesArray.count > 0 {
-            myInfoArray.addObject(sectionFromApps)
+            myInfoArray.add(sectionFromApps)
         }
         if sectionAltruist.filesArray.count > 0 {
-            myInfoArray.addObject(sectionAltruist)
+            myInfoArray.add(sectionAltruist)
         }
         
         // return back the result
-        completion(mySectionsArray: myInfoArray, sampleSectionsArray: sampleInfoArray)
+        completion(myInfoArray, sampleInfoArray)
     }
     
     
     
     // MARK: - Add file into Section
-    func addFile(file: NSDictionary, IntoSection section:SQFilesSectionInfo) -> Void {
+    func addFile(_ file: NSDictionary, IntoSection section:SQFilesSectionInfo) -> Void {
         var tempHeight: CGFloat = 44
         
-        if section.sectionName.rangeOfString("Sample") != nil || section.sectionName.rangeOfString("All") != nil || section.sectionName.rangeOfString("Men") != nil || section.sectionName.rangeOfString("Women") != nil {
+        if section.sectionName.range(of: "Sample") != nil ||
+           section.sectionName.range(of: "All") != nil ||
+           section.sectionName.range(of: "Men") != nil ||
+           section.sectionName.range(of: "Women") != nil {
             
             // calculate height for sample file
             let tempText: NSAttributedString = self.prepareTextFromSampleFile(file)
@@ -144,60 +156,60 @@ class SQFilesHelper: NSObject {
     
     
     // MARK: - Calculate files height
-    func heightForRow(text: NSString) -> CGFloat {
-        let font = UIFont.systemFontOfSize(13)
+    func heightForRow(_ text: NSString) -> CGFloat {
+        let font = UIFont.systemFont(ofSize: 13)
         let shadow = NSShadow()
         shadow.shadowOffset = CGSize(width: 0, height: -1)
         shadow.shadowBlurRadius = 0.5
         
         let paragraph = NSMutableParagraphStyle()
-        paragraph.lineBreakMode = NSLineBreakMode.ByWordWrapping
-        paragraph.alignment = NSTextAlignment.Left
+        paragraph.lineBreakMode = NSLineBreakMode.byWordWrapping
+        paragraph.alignment = NSTextAlignment.left
         
-        let size = CGSize(width: 270, height:CGFloat.max)
-        let options: NSStringDrawingOptions = [.UsesLineFragmentOrigin, .UsesFontLeading]
+        let size = CGSize(width: 270, height:CGFloat.greatestFiniteMagnitude)
+        let options: NSStringDrawingOptions = [.usesLineFragmentOrigin, .usesFontLeading]
         
-        let rect: CGRect = text.boundingRectWithSize(size,
-                                                     options: options,
-                                                     attributes: [NSFontAttributeName: font, NSParagraphStyleAttributeName: paragraph, NSShadowAttributeName: shadow],
-                                                     context: nil)
+        let rect: CGRect = text.boundingRect(with: size,
+                                             options: options,
+                                             attributes: [NSFontAttributeName: font, NSParagraphStyleAttributeName: paragraph, NSShadowAttributeName: shadow],
+                                             context: nil)
         
-        if CGRectGetHeight(rect) < 42.960938 {
+        if rect.height < 42.960938 {
             return 44
         } else {
-            return CGRectGetHeight(rect) + 10
+            return rect.height + 10
         }
     }
     
     
-    func heightForRowSampleFile(text: NSAttributedString) -> CGFloat {
-        let size = CGSize(width: 260, height:CGFloat.max)
-        let options: NSStringDrawingOptions = [.UsesLineFragmentOrigin, .UsesFontLeading]
+    func heightForRowSampleFile(_ text: NSAttributedString) -> CGFloat {
+        let size = CGSize(width: 260, height:CGFloat.greatestFiniteMagnitude)
+        let options: NSStringDrawingOptions = [.usesLineFragmentOrigin, .usesFontLeading]
         
-        let rect: CGRect = text.boundingRectWithSize(size, options: options, context: nil)
+        let rect: CGRect = text.boundingRect(with: size, options: options, context: nil)
         
-        if CGRectGetHeight(rect) < 40 {
+        if rect.height < 40 {
             return 44
         } else {
-            return CGRectGetHeight(rect) + 15
+            return rect.height + 15
         }
     }
     
     
     
     // MARK: - Prepare text form files
-    func prepareTextFromMyFile(file: NSDictionary) -> NSString {
+    func prepareTextFromMyFile(_ file: NSDictionary) -> NSString {
         let preparedText = NSMutableString()
-        let fileName = file.objectForKey("Name") as! String
-        preparedText.appendString(fileName)
+        let fileName = file.object(forKey: "Name") as! String
+        preparedText.append(fileName)
         
         return preparedText
     }
     
     
-    func prepareTextFromSampleFile(file: NSDictionary) -> NSAttributedString {
-        var friendlyDesk1 = file.objectForKey("FriendlyDesc1") as! NSString
-        var friendlyDesk2 = file.objectForKey("FriendlyDesc2") as! NSString
+    func prepareTextFromSampleFile(_ file: NSDictionary) -> NSAttributedString {
+        var friendlyDesk1 = file.object(forKey: "FriendlyDesc1") as! NSString
+        var friendlyDesk2 = file.object(forKey: "FriendlyDesc2") as! NSString
         
         if friendlyDesk1 == NSNull() || friendlyDesk1.length == 0 {
             friendlyDesk1 = "noname1"
@@ -209,8 +221,8 @@ class SQFilesHelper: NSObject {
         let tempString = String(format: "%@\n%@", friendlyDesk1, friendlyDesk2)
         let attrString = NSMutableAttributedString.init(string: tempString)
         
-        attrString.addAttribute(NSFontAttributeName, value: UIFont.systemFontOfSize(13), range: NSMakeRange(0, friendlyDesk1.length))
-        attrString.addAttribute(NSFontAttributeName, value: UIFont.systemFontOfSize(10), range: NSMakeRange(friendlyDesk1.length + 1, friendlyDesk2.length))
+        attrString.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 13), range: NSMakeRange(0, friendlyDesk1.length - 1))
+        attrString.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 10), range: NSMakeRange(friendlyDesk1.length + 1, friendlyDesk2.length))
         
         return attrString
     }
@@ -218,33 +230,35 @@ class SQFilesHelper: NSObject {
     
     
     // MARK: - Search for fileID in Section
-    func searchForFileID(fileID: NSString, InMyFilesSectionsArray sectionsArray:NSArray) -> NSDictionary? {
+    func searchForFileID(_ fileID: NSString, InMyFilesSectionsArray sectionsArray:NSArray) -> NSDictionary? {
         var sectionIndexNumber: NSNumber?
         var fileIndexNumber: NSNumber?
         
         for arrayIndex in 0 ..< sectionsArray.count   {
-            if let section = sectionsArray.objectAtIndex(arrayIndex) as? SQFilesSectionInfo {
+            if let section = sectionsArray.object(at: arrayIndex) as? SQFilesSectionInfo {
                 let arrayWithFilesFromSection: NSArray = section.filesArray
                 
                 for fileIndex in 0 ..< arrayWithFilesFromSection.count {
-                    if let file = arrayWithFilesFromSection.objectAtIndex(fileIndex) as? NSDictionary  {
-                        let fileIDFromSection = file.objectForKey("Id") as! NSString
+                    
+                    if let file = arrayWithFilesFromSection.object(at: fileIndex) as? NSDictionary  {
+                        let fileIDFromSection = file.object(forKey: "Id") as! NSString
                         if fileIDFromSection == fileID {
-                            fileIndexNumber = NSNumber(integer: fileIndex)
+                            fileIndexNumber = NSNumber(value: fileIndex as Int)
                             break
                         }
                     }
                 }
                 
                 if fileIndexNumber != nil {
-                    sectionIndexNumber = NSNumber(integer: arrayIndex)
+                    sectionIndexNumber = NSNumber(value: arrayIndex as Int)
                     break
                 }
             }
         }
         
         if sectionIndexNumber != nil && fileIndexNumber != nil {
-            let indexesDict: NSDictionary = ["sectionIndex": sectionIndexNumber!, "fileIndex": fileIndexNumber!]
+            let indexesDict: NSDictionary = ["sectionIndex": sectionIndexNumber!,
+                                             "fileIndex": fileIndexNumber!]
             return indexesDict
 
         } else {
@@ -253,29 +267,31 @@ class SQFilesHelper: NSObject {
     }
     
     
-    func searchForFileID(fileID: NSString, InSampleFilesSectionsArray sectionsArray:NSArray) -> NSDictionary? {
+    func searchForFileID(_ fileID: NSString, InSampleFilesSectionsArray sectionsArray:NSArray) -> NSDictionary? {
         var sectionIndexNumber: NSNumber?
         var fileIndexNumber: NSNumber?
         
-        if let section = sectionsArray.objectAtIndex(0) as? SQFilesSectionInfo {
+        if let section = sectionsArray.object(at: 0) as? SQFilesSectionInfo {
             let arrayWithFilesFromSection: NSArray = section.filesArray
             
             for fileIndex in 0 ..< arrayWithFilesFromSection.count {
-                if let file = arrayWithFilesFromSection.objectAtIndex(fileIndex) as? NSDictionary  {
-                    let fileIDFromSection = file.objectForKey("Id") as! NSString
+                
+                if let file = arrayWithFilesFromSection.object(at: fileIndex) as? NSDictionary  {
+                    let fileIDFromSection = file.object(forKey: "Id") as! NSString
                     if fileIDFromSection == fileID {
-                        fileIndexNumber = NSNumber(integer: fileIndex)
+                        fileIndexNumber = NSNumber(value: fileIndex as Int)
                         break
                     }
                 }
             }
             
             if fileIndexNumber != nil {
-                sectionIndexNumber = NSNumber(integer: 0)
+                sectionIndexNumber = NSNumber(value: 0 as Int)
             }
             
             if sectionIndexNumber != nil && fileIndexNumber != nil {
-                let indexesDict: NSDictionary = ["sectionIndex": sectionIndexNumber!, "fileIndex": fileIndexNumber!]
+                let indexesDict: NSDictionary = ["sectionIndex": sectionIndexNumber!,
+                                                 "fileIndex": fileIndexNumber!]
                 return indexesDict
                 
             } else {
@@ -289,28 +305,30 @@ class SQFilesHelper: NSObject {
     
     
     // MARK: - Check if file is present in section
-    func checkIfSelectedFileID(fileID: NSString, IsPresentInSection sectionNumber:Int, ForCategory category:String) -> NSNumber? {
+    func checkIfSelectedFileID(_ fileID: NSString, IsPresentInSection sectionNumber:Int, ForCategory category:String) -> NSNumber? {
         var indexOfSelectedFile = NSNumber()
         let filesContainer = SQFilesContainer.instance
         var section = SQFilesSectionInfo.init(name: kSAMPLE_ALL_FILES_CATEGORY_NAME)
         
-        if category.rangeOfString("sample") != nil {
+        if category.range(of: "sample") != nil {
             if filesContainer.sampleSectionsArray != nil {
-                section = filesContainer.sampleSectionsArray!.objectAtIndex(sectionNumber) as! SQFilesSectionInfo
+                section = filesContainer.sampleSectionsArray!.object(at: sectionNumber) as! SQFilesSectionInfo
             }
         } else {
             if filesContainer.mySectionsArray != nil {
-                section = filesContainer.mySectionsArray!.objectAtIndex(sectionNumber) as! SQFilesSectionInfo
+                section = filesContainer.mySectionsArray!.object(at: sectionNumber) as! SQFilesSectionInfo
             }
         }
         
         let arrayWithFilesFromSection = section.filesArray
+        
         for index in 0 ..< arrayWithFilesFromSection.count {
-            if let file = arrayWithFilesFromSection.objectAtIndex(index) as? NSDictionary {
+            
+            if let file = arrayWithFilesFromSection.object(at: index) as? NSDictionary {
                 
-                let fileIDFromSection = file.objectForKey("Id") as! NSString
+                let fileIDFromSection = file.object(forKey: "Id") as! NSString
                 if fileIDFromSection == fileID {
-                    indexOfSelectedFile = NSNumber(integer: index)
+                    indexOfSelectedFile = NSNumber(value: index as Int)
                     break
                 }
             }
