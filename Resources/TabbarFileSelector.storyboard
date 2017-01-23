@@ -120,14 +120,14 @@ Do you want this app to analyze genetic data from one of your files or a sample 
                     </view>
                     <navigationItem key="navigationItem" id="7wl-It-ob7"/>
                     <connections>
-                        <outlet property="grayView" destination="0bo-cU-pff" id="wk5-dd-9Mq"/>
-                        <outlet property="introLabel" destination="gGA-AX-y9C" id="9EF-E8-I4R"/>
-                        <outlet property="myFilesButton" destination="wzn-kK-imI" id="ECE-Et-gll"/>
-                        <outlet property="myFilesIcon" destination="Fz2-fr-pgh" id="rhX-DE-Akg"/>
-                        <outlet property="myFilesLabel" destination="eG7-Ej-XQr" id="B24-pM-1r1"/>
-                        <outlet property="sampleFilesButton" destination="RrF-Ln-DHv" id="v48-bS-ibv"/>
-                        <outlet property="sampleFilesIcon" destination="JU0-wb-t9Z" id="LD1-El-KdR"/>
-                        <outlet property="sampleFilesLabel" destination="Jxd-M8-UoU" id="16f-Nd-W6q"/>
+                        <outlet property="grayView" destination="0bo-cU-pff" id="Pfr-ss-b4k"/>
+                        <outlet property="introLabel" destination="gGA-AX-y9C" id="Tkp-Ky-fcD"/>
+                        <outlet property="myFilesButton" destination="wzn-kK-imI" id="55h-yV-ro2"/>
+                        <outlet property="myFilesIcon" destination="Fz2-fr-pgh" id="RYG-hh-96I"/>
+                        <outlet property="myFilesLabel" destination="eG7-Ej-XQr" id="0vv-G6-mIz"/>
+                        <outlet property="sampleFilesButton" destination="RrF-Ln-DHv" id="CSM-Wn-C32"/>
+                        <outlet property="sampleFilesIcon" destination="JU0-wb-t9Z" id="3JN-gE-kvZ"/>
+                        <outlet property="sampleFilesLabel" destination="Jxd-M8-UoU" id="ZQI-hS-5e1"/>
                         <segue destination="OYv-Jf-pVB" kind="presentation" identifier="SHOW_FILES_SEGUE_ID" modalTransitionStyle="crossDissolve" id="YMI-Nu-SlL"/>
                     </connections>
                 </viewController>
@@ -191,7 +191,7 @@ Do you want this app to analyze genetic data from one of your files or a sample 
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2T8-H2-T7k" id="Ajp-1B-eM7">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dao-ao-uaP">
@@ -262,7 +262,7 @@ Do you want this app to analyze genetic data from one of your files or a sample 
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WIM-Rm-d3N" id="Fi5-mN-HjE">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PUF-uv-KG1">

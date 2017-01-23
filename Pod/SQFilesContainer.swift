@@ -9,8 +9,8 @@ import Foundation
 
 open class SQFilesContainer: NSObject {
     
-    var mySectionsArray: NSArray?
-    var sampleSectionsArray: NSArray?
+    open var mySectionsArray: NSArray?
+    open var sampleSectionsArray: NSArray?
     
     
     // MARK: - Initializer

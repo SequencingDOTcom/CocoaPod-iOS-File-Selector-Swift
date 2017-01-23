@@ -19,12 +19,12 @@ import Foundation
 // file selector api class
 open class SQFilesAPI: NSObject {
     
-    weak var selectedFileDelegate: SQFileSelectorProtocol?
+    open weak var selectedFileDelegate: SQFileSelectorProtocol?
     
-    var closeButton: Bool = false
-    var selectedFileID: NSString?
-    var videoFileName: NSString?
-    var accessToken = NSString()
+    open var closeButton: Bool = false
+    open var selectedFileID: NSString?
+    open var videoFileName: NSString?
+    open var accessToken = NSString()
     
     
     // MARK: - Initializer
