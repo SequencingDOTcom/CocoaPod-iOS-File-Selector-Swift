@@ -65,22 +65,26 @@ Please follow this guide to install File Selector module in your existed or new 
 * create a new project in Xcode
 	
 * create Podfile in your project directory: 
+
 	```
 	$ pod init
 	```
 		
 * specify following parameters in Podfile: 
+
 	```
 	pod 'sequencing-oauth-api-swift', '~> 2.0.0'
-	pod 'sequencing-file-selector-api-swift', '~> 1.1.0'
+	pod 'sequencing-file-selector-api-swift', '~> 1.1.1'
 	```		
 		
 * install the dependency in your project: 
+
 	```
 	$ pod install
 	```
 		
 * always open the Xcode workspace instead of the project file: 
+
 	```
 	$ open *.xcworkspace
 	```
@@ -127,40 +131,53 @@ Please follow this guide to install File Selector module in your existed or new 
 ### Step 4: Set up file selector plugin in code
 		
 * add import: 
+
 	```
 	import sequencing_file_selector_api_swift
 	```
 
 * subscribe your class to file selector protocol: 
+
 	```
-	SQFileSelectorProtocolDelegate
+	SQFileSelectorProtocol
 	```
 		
+* add property for SQFilesAPI class
+	
+	```
+	let filesApiHelper = SQFilesAPI.instance
+	```
+	
 * subscribe your class as handler/delegate for selected file in file selector: 
+
 	```
-	SQFilesAPI.instance.selectedFileDelegate = self
+	self.filesApiHelper.selectedFileDelegate = self
 	```
 		
-* implement "handleFileSelected" method from ```SQFileSelectorProtocolDelegate``` protocol
+* implement "handleFileSelected" method from ```SQFileSelectorProtocol``` protocol
+
 	```
-	func handleFileSelected(file: NSDictionary) -> Void {
+	func handleFileSelected(_ file: NSDictionary) -> Void {
 		// your code here
     }
 	```
 
 * implement optional "closeButtonPressed" method from protocol if needed
+
 	```
 	func closeButtonPressed() -> Void {
         // your code here
     }
 	```
 	
+
 	
 ### Step 5: Use file selector 
 
 * set up some button for getting/viewing files for logged in user, and specify delegate method for this button
 	
 * specify segue ID constant for file selector UI
+
 	```
 	let FILES_CONTROLLER_SEGUE_ID = "GET_FILES"
 	```	
@@ -168,24 +185,28 @@ Please follow this guide to install File Selector module in your existed or new 
 * you can load/get files, list of my files and list of sample files, via ```withToken: loadFiles:``` method (via ```SQFilesAPI``` class with shared instance init access).
 	
 	pay attention, you need to pass on the String value of ```token.accessToken``` object as a parameter for this method:
+	
 	```
-	SQFilesAPI.instance.loadFilesWithToken(self.token!.accessToken, success: { (success) in
-		dispatch_async(dispatch_get_main_queue()) {
+	self.filesApiHelper.loadFilesWithToken(self.token!.accessToken as NSString, success: { (success) in
+		DispatchQueue.main.async {
 			// your code here
 		}
-    })
+	})
 	```
 		
 	```loadFilesWithToken``` method will return a Bool value with ```true` if files were successfully loaded or ```false``` if there were any problem. You need to manage this in your code
 		
+		
 * if files were loaded successfully you can now open/show File Selector in UI. You can do it by calling File Selector view via ```performSegueWithIdentifier``` method:
+
 	```
-	self.performSegueWithIdentifier(self.FILES_CONTROLLER_SEGUE_ID, sender: nil)
+	self.performSegue(withIdentifier: self.FILES_CONTROLLER_SEGUE_ID, sender: nil)
 	```
 	
 	while opening File Selector in UI you can set `Close` button to be present if you need
+	
 	```
-	SQFilesAPI.instance.closeButton = true
+	self.filesApiHelper.closeButton = true
 	```
 	
 * when user selects any file and clicks on "Continue" button in File Selector UI - ```handleFileSelected``` method from ```SQFileSelectorProtocolDelegate``` protocol will be called then. Selected file will be passed on as a parameter. In this method you can handle this selected file
@@ -233,24 +254,27 @@ Please follow this guide to install File Selector module in your existed or new 
 	
 	
 * example of delegate method for select file button
+
 	```
-	@IBAction func loadFilesButtonPressed(sender: AnyObject) {
-        self.view.userInteractionEnabled = false
+	@IBAction func loadFilesButtonPressed(_ sender: AnyObject) {
+	
+        self.view.isUserInteractionEnabled = false
         self.startActivityIndicatorWithTitle("Loading Files")
         if self.token != nil {
-            SQFilesAPI.instance.loadFilesWithToken(self.token!.accessToken, success: { (success) in
-                dispatch_async(self.kMainQueue) {
-                    if success {
+            self.filesApiHelper.loadFilesWithToken(self.token!.accessToken as NSString, success: { (success) in
+            
+            	DispatchQueue.main.async {
+            		if success {
                         self.stopActivityIndicator()
-                        self.view.userInteractionEnabled = true
-                        self.performSegueWithIdentifier(self.FILES_CONTROLLER_SEGUE_ID, sender: nil)
+                        self.view.isUserInteractionEnabled = true
+                        self.performSegue(withIdentifier: self.FILES_CONTROLLER_SEGUE_ID, sender: nil)
                         
                     } else {
                         self.stopActivityIndicator()
-                        self.view.userInteractionEnabled = true
+                        self.view.isUserInteractionEnabled = true
                         self.showAlertWithMessage("Sorry, can't load genetic files")
                     }
-                }
+            	}
             })
         } else {
         	self.stopActivityIndicator()
@@ -261,31 +285,32 @@ Please follow this guide to install File Selector module in your existed or new 
 
 
 * example of ```handleFileSelected``` method
+
 	```
-	func handleFileSelected(file: NSDictionary) -> Void {
-        self.dismissViewControllerAnimated(true, completion: nil)
+	func handleFileSelected(_ file: NSDictionary) -> Void {
+        self.dismiss(animated: true, completion: nil)
         print(file)
-        if file.allKeys.count > 0 {
-            dispatch_async(self.kMainQueue) {
-                self.stopActivityIndicator()
-                self.view.userInteractionEnabled = true
-                self.selectedFile = file
-            }
-        } else {
-            dispatch_async(kMainQueue, {
-                self.stopActivityIndicator()
-                self.view.userInteractionEnabled = true
+        
+        DispatchQueue.main.async {
+        	if file.allKeys.count > 0 {
+	        	self.stopActivityIndicator()
+                self.view.isUserInteractionEnabled = true
+                self.selectedFile = file    	
+        	} else {
+	        	self.stopActivityIndicator()
+                self.view.isUserInteractionEnabled = true
                 self.showAlertWithMessage("Sorry, can't load genetic files")
-            })
+        	}
         }
     }
 	```
 
 * example of ```closeButtonPressed``` method
+
 	```
 	func closeButtonPressed() -> Void {
 		self.stopActivityIndicator()
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
 	```
 
