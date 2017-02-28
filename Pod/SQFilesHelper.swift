@@ -68,7 +68,7 @@ class SQFilesHelper: NSObject {
                 switch category {
                     
                 case 0:     // Sample Files Category
-                    if tempFile.allKeys.contains(where: { $0 as! String == "Sex"}) {
+                    if (tempFile.allKeys as NSArray).contains("Sex") {
                         
                         let sex = tempFile.object(forKey: "Sex") as! NSString?
                         if sex != nil {
@@ -208,25 +208,79 @@ class SQFilesHelper: NSObject {
     
     
     func prepareTextFromSampleFile(_ file: NSDictionary) -> NSAttributedString {
-        var friendlyDesk1 = file.object(forKey: "FriendlyDesc1") as! NSString
-        var friendlyDesk2 = file.object(forKey: "FriendlyDesc2") as! NSString
+        var friendlyDesk1:  NSString
+        var friendlyDesk2:  NSString
+        var tempString: String = ""
+        var attrString = NSMutableAttributedString.init(string: tempString)
         
-        if friendlyDesk1 == NSNull() || friendlyDesk1.length == 0 {
-            friendlyDesk1 = "noname1"
+        let friendlyDesk1Temp = self.prepareDesc1String(file)
+        let friendlyDesk2Temp = self.prepareDesc2String(file)
+        
+        if friendlyDesk1Temp.length == 0 {
+            friendlyDesk1 = "noname"
+        } else {
+            friendlyDesk1 = friendlyDesk1Temp
         }
-        if friendlyDesk2 == NSNull() || friendlyDesk2.length == 0 {
-            friendlyDesk2 = "noname2"
+        
+        if friendlyDesk2Temp.length > 0 {
+            friendlyDesk2 = friendlyDesk2Temp
+            tempString = String(format: "%@\n%@", friendlyDesk1, friendlyDesk2)
+            attrString = NSMutableAttributedString.init(string: tempString)
+            
+            let fileTitle:    NSRange = NSMakeRange(0, friendlyDesk1.length - 1)
+            let fileSubTitle: NSRange = NSMakeRange(friendlyDesk1.length + 1, friendlyDesk2.length)
+            
+            if fileTitle.location != NSNotFound {
+                attrString.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 13), range: fileTitle)
+            }
+            if fileSubTitle.location != NSNotFound {
+                attrString.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 10), range: fileSubTitle)
+            }
+            
+        } else {
+            tempString = String(format: "%@", friendlyDesk1)
+            attrString = NSMutableAttributedString.init(string: tempString)
+            
+            let fileTitle: NSRange = NSMakeRange(0, friendlyDesk1.length - 1)
+            
+            if fileTitle.location != NSNotFound {
+                attrString.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 13), range: fileTitle)
+            }
         }
-        
-        let tempString = String(format: "%@\n%@", friendlyDesk1, friendlyDesk2)
-        let attrString = NSMutableAttributedString.init(string: tempString)
-        
-        attrString.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 13), range: NSMakeRange(0, friendlyDesk1.length - 1))
-        attrString.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 10), range: NSMakeRange(friendlyDesk1.length + 1, friendlyDesk2.length))
         
         return attrString
     }
     
+    
+    func prepareDesc1String(_ file: NSDictionary) -> NSString {
+        var tempString: NSString = ""
+        
+        if (file.allKeys as NSArray).contains("FriendlyDesc1") {
+            let desc1 = file.object(forKey: "FriendlyDesc1")
+            
+            if desc1 != nil {
+                tempString = desc1 as! NSString
+            } else {
+                tempString = ""
+            }
+        }
+        return tempString
+    }
+    
+    func prepareDesc2String(_ file: NSDictionary) -> NSString {
+        var tempString: NSString  = ""
+        
+        if (file.allKeys as NSArray).contains("FriendlyDesc2") {
+            let desc2 = file.object(forKey: "FriendlyDesc2")
+            
+            if desc2 != nil {
+                tempString = desc2 as! NSString
+            } else {
+                tempString = ""
+            }
+        }
+        return tempString
+    }
     
     
     // MARK: - Search for fileID in Section
