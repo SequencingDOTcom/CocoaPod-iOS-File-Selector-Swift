@@ -13,7 +13,7 @@
         <!--Files Intro View Controller-->
         <scene sceneID="SHV-NP-z2R">
             <objects>
-                <viewController id="N0L-Oi-G8Z" customClass="SQFilesIntroViewController" customModule="oauthdemoapp_swift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="N0L-Oi-G8Z" customClass="SQFilesIntroViewController" customModule="sequencing_file_selector_api_swift" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="sOC-tY-fp2"/>
                         <viewControllerLayoutGuide type="bottom" id="dnB-Zr-0Wd"/>
@@ -174,7 +174,7 @@ Do you want this app to analyze genetic data from one of your files or a sample 
         <!--Files My Files View Controller-->
         <scene sceneID="Ron-WE-zwe">
             <objects>
-                <viewController id="KFq-Hc-at9" customClass="SQFilesMyFilesViewController" customModule="oauthdemoapp_swift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="KFq-Hc-at9" customClass="SQFilesMyFilesViewController" customModule="sequencing_file_selector_api_swift" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HBm-6g-B5a"/>
                         <viewControllerLayoutGuide type="bottom" id="2Lo-xM-8NI"/>
@@ -187,7 +187,7 @@ Do you want this app to analyze genetic data from one of your files or a sample 
                                 <rect key="frame" x="0.0" y="109" width="375" height="509"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="2T8-H2-T7k" customClass="SQFilesTableCell" customModule="oauthdemoapp_swift" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="2T8-H2-T7k" customClass="SQFilesTableCell" customModule="sequencing_file_selector_api_swift">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2T8-H2-T7k" id="Ajp-1B-eM7">
@@ -245,7 +245,7 @@ Do you want this app to analyze genetic data from one of your files or a sample 
         <!--Files Sample Files View Controller-->
         <scene sceneID="J7Z-0o-r4Y">
             <objects>
-                <viewController id="V7o-NX-FCv" customClass="SQFilesSampleFilesViewController" customModule="oauthdemoapp_swift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="V7o-NX-FCv" customClass="SQFilesSampleFilesViewController" customModule="sequencing_file_selector_api_swift" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="CPC-yO-guR"/>
                         <viewControllerLayoutGuide type="bottom" id="qPc-33-dbv"/>
@@ -258,7 +258,7 @@ Do you want this app to analyze genetic data from one of your files or a sample 
                                 <rect key="frame" x="0.0" y="109" width="375" height="509"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="WIM-Rm-d3N" customClass="SQFilesTableCell" customModule="oauthdemoapp_swift" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="WIM-Rm-d3N" customClass="SQFilesTableCell" customModule="sequencing_file_selector_api_swift">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WIM-Rm-d3N" id="Fi5-mN-HjE">
