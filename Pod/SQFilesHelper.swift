@@ -134,7 +134,7 @@ class SQFilesHelper: NSObject {
     
     // MARK: - Add file into Section
     func addFile(_ file: NSDictionary, IntoSection section:SQFilesSectionInfo) -> Void {
-        var tempHeight: CGFloat = 44
+        var tempHeight: CGFloat = 20
         
         if section.sectionName.range(of: "Sample") != nil ||
            section.sectionName.range(of: "All") != nil ||
@@ -157,42 +157,12 @@ class SQFilesHelper: NSObject {
     
     // MARK: - Calculate files height
     func heightForRow(_ text: NSString) -> CGFloat {
-        let font = UIFont.systemFont(ofSize: 13)
-        let shadow = NSShadow()
-        shadow.shadowOffset = CGSize(width: 0, height: -1)
-        shadow.shadowBlurRadius = 0.5
-        
-        let paragraph = NSMutableParagraphStyle()
-        paragraph.lineBreakMode = NSLineBreakMode.byWordWrapping
-        paragraph.alignment = NSTextAlignment.left
-        
-        let size = CGSize(width: 270, height:CGFloat.greatestFiniteMagnitude)
-        let options: NSStringDrawingOptions = [.usesLineFragmentOrigin, .usesFontLeading]
-        
-        let rect: CGRect = text.boundingRect(with: size,
-                                             options: options,
-                                             attributes: [NSFontAttributeName: font, NSParagraphStyleAttributeName: paragraph, NSShadowAttributeName: shadow],
-                                             context: nil)
-        
-        if rect.height < 42.960938 {
-            return 44
-        } else {
-            return rect.height + 10
-        }
+        return 20
     }
     
     
     func heightForRowSampleFile(_ text: NSAttributedString) -> CGFloat {
-        let size = CGSize(width: 260, height:CGFloat.greatestFiniteMagnitude)
-        let options: NSStringDrawingOptions = [.usesLineFragmentOrigin, .usesFontLeading]
-        
-        let rect: CGRect = text.boundingRect(with: size, options: options, context: nil)
-        
-        if rect.height < 40 {
-            return 44
-        } else {
-            return rect.height + 15
-        }
+        return 20
     }
     
     

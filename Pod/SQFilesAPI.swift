@@ -19,7 +19,7 @@ import Foundation
 // file selector api class
 open class SQFilesAPI: NSObject {
     
-    open weak var selectedFileDelegate: SQFileSelectorProtocol?
+    open weak var delegate: SQFileSelectorProtocol?
     
     open var closeButton: Bool = false
     open var selectedFileID: NSString?
@@ -33,7 +33,10 @@ open class SQFilesAPI: NSObject {
     
     
     // MARK: - API methods
-    open func loadFilesWithToken(_ accessToken: NSString, success: @escaping (_ success: Bool) -> Void) -> Void {
+    open func loadFilesWithToken(_ accessToken: NSString, closeButton: Bool, selectedFileDelegate: SQFileSelectorProtocol, result: @escaping (_ success: Bool) -> Void) -> Void {
+        
+        self.delegate = selectedFileDelegate
+        self.closeButton = closeButton
         self.accessToken = accessToken
         
         self.loadFilesFromServer { (files) in
@@ -42,14 +45,14 @@ open class SQFilesAPI: NSObject {
                     if mySectionsArray != nil || sampleSectionsArray != nil  {
                         SQFilesContainer.instance.mySectionsArray = mySectionsArray
                         SQFilesContainer.instance.sampleSectionsArray = sampleSectionsArray
-                        success(true)
+                        result(true)
                         
                     } else {
-                        success(false)
+                        result(false)
                     }
                 })
             } else {
-                success(false)
+                result(false)
             }
         }
     }

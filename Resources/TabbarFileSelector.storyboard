@@ -195,15 +195,16 @@ Do you want this app to analyze genetic data from one of your files or a sample 
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dao-ao-uaP">
-                                                    <rect key="frame" x="8" y="14" width="354" height="16"/>
+                                                    <rect key="frame" x="8" y="10" width="354" height="23.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="Dao-ao-uaP" firstAttribute="centerY" secondItem="Ajp-1B-eM7" secondAttribute="centerY" id="6CE-8a-1Ih"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="Dao-ao-uaP" secondAttribute="trailing" constant="5" id="PIw-Ix-P3v"/>
+                                                <constraint firstItem="Dao-ao-uaP" firstAttribute="top" secondItem="Ajp-1B-eM7" secondAttribute="top" constant="10" id="Sp1-Wj-v2Q"/>
+                                                <constraint firstAttribute="bottom" secondItem="Dao-ao-uaP" secondAttribute="bottom" constant="10" id="lck-qR-Uxl"/>
                                                 <constraint firstAttribute="leadingMargin" secondItem="Dao-ao-uaP" secondAttribute="leading" id="xXk-Ze-B5p"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -266,7 +267,7 @@ Do you want this app to analyze genetic data from one of your files or a sample 
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PUF-uv-KG1">
-                                                    <rect key="frame" x="8" y="14" width="354" height="16"/>
+                                                    <rect key="frame" x="8" y="10" width="354" height="23.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -274,8 +275,9 @@ Do you want this app to analyze genetic data from one of your files or a sample 
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailingMargin" secondItem="PUF-uv-KG1" secondAttribute="trailing" constant="5" id="0P1-on-GcG"/>
+                                                <constraint firstItem="PUF-uv-KG1" firstAttribute="top" secondItem="Fi5-mN-HjE" secondAttribute="top" constant="10" id="GhK-7r-Uba"/>
                                                 <constraint firstAttribute="leadingMargin" secondItem="PUF-uv-KG1" secondAttribute="leading" id="M2Q-a3-E7y"/>
-                                                <constraint firstItem="PUF-uv-KG1" firstAttribute="centerY" secondItem="Fi5-mN-HjE" secondAttribute="centerY" id="qez-4N-Bgi"/>
+                                                <constraint firstAttribute="bottom" secondItem="PUF-uv-KG1" secondAttribute="bottom" constant="10" id="Ose-7B-SGf"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>

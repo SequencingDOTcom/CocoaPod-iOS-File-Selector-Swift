@@ -246,7 +246,7 @@ class SQFilesIntroViewController: UIViewController, UIGestureRecognizerDelegate,
     // close button tapped
     func closeButtonPressed() -> Void {
         SQFilesAPI.instance.selectedFileID = nil
-        SQFilesAPI.instance.selectedFileDelegate?.closeButtonPressed?()
+        SQFilesAPI.instance.delegate?.closeButtonPressed?()
     }
     
     

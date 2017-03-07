@@ -79,6 +79,8 @@ class SQFilesMyFilesViewController: UIViewController, UITableViewDataSource, UIT
         
         // allow using extra "native" radioButton for selectin rows
         tableView.setEditing(true, animated: true)
+        tableView.estimatedRowHeight = 20
+        tableView.rowHeight = UITableViewAutomaticDimension
         
         // prepare array with segmented control items and indexes in source
         let filesContainer = SQFilesContainer.instance
@@ -275,14 +277,14 @@ class SQFilesMyFilesViewController: UIViewController, UITableViewDataSource, UIT
         let selectedFile = filesArray.object(at: nowSelectedFileIndexPath!.row)
         
         if selectedFile is NSDictionary {
-            SQFilesAPI.instance.selectedFileDelegate?.handleFileSelected(selectedFile as! NSDictionary)
+            SQFilesAPI.instance.delegate?.handleFileSelected(selectedFile as! NSDictionary)
         }
     }
     
     
     func closeButtonPressed() -> Void {
         SQFilesAPI.instance.selectedFileID = nil
-        SQFilesAPI.instance.selectedFileDelegate?.closeButtonPressed?()
+        SQFilesAPI.instance.delegate?.closeButtonPressed?()
     }
     
     
@@ -291,12 +293,6 @@ class SQFilesMyFilesViewController: UIViewController, UITableViewDataSource, UIT
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filesArray.count
     }
-    
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return filesHeightsArray.object(at: indexPath.row) as! CGFloat
-    }
-    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! SQFilesTableCell
