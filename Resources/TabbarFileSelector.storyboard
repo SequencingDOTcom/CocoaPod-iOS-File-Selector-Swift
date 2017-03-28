@@ -13,7 +13,7 @@
         <!--Sample Files View Controller-->
         <scene sceneID="ays-tf-wZP">
             <objects>
-                <viewController id="9zs-7A-VuL" customClass="SQSampleFilesViewController" customModule="sequencing_file_selector_api_swift" sceneMemberID="viewController">
+                <viewController id="9zs-7A-VuL" customClass="SQSampleFilesViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fvs-57-Wpz"/>
                         <viewControllerLayoutGuide type="bottom" id="SpP-5Z-pN7"/>
@@ -26,7 +26,7 @@
                                 <rect key="frame" x="0.0" y="109" width="375" height="509"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="QFB-ta-Rvt" customClass="SQTableCell" customModule="sequencing_file_selector_api_swift">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="QFB-ta-Rvt" customClass="SQTableCell">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QFB-ta-Rvt" id="tce-az-XnV">
@@ -85,7 +85,7 @@
         <!--My Files View Controller-->
         <scene sceneID="g68-Fp-MDG">
             <objects>
-                <viewController id="RSt-t3-lhx" customClass="SQMyFilesViewController" customModule="sequencing_file_selector_api_swift" sceneMemberID="viewController">
+                <viewController id="RSt-t3-lhx" customClass="SQMyFilesViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ypb-Eo-qhF"/>
                         <viewControllerLayoutGuide type="bottom" id="ouA-8w-n8q"/>
@@ -98,7 +98,7 @@
                                 <rect key="frame" x="0.0" y="109" width="375" height="509"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="KH3-qp-DD7" customClass="SQTableCell" customModule="sequencing_file_selector_api_swift">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="KH3-qp-DD7" customClass="SQTableCell">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KH3-qp-DD7" id="sDB-xF-w8O">
@@ -157,7 +157,7 @@
         <!--Intro View Controller-->
         <scene sceneID="MJQ-zs-z7r">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="FRu-Ia-YYJ" customClass="SQIntroViewController" customModule="sequencing_file_selector_api_swift" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="FRu-Ia-YYJ" customClass="SQIntroViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="i2t-If-Mnh"/>
                         <viewControllerLayoutGuide type="bottom" id="F9b-BO-HOp"/>
