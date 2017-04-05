@@ -137,9 +137,9 @@ Please follow this guide to install File Selector module in your existed or new 
 * call file selector via ```showFiles(withTokenProvider: showCloseButton: previouslySelectedFileID: delegate:)``` method
 	```
 	SQFilesAPI.sharedInstance().showFiles(withTokenProvider: SQOAuth.sharedInstance(),
-                                  showCloseButton: true,
-                                  previouslySelectedFileID: nil,
-                                  delegate: self)
+                                  showCloseButton: <true or false>,
+                                  previouslySelectedFileID: "your file id",
+                                  delegate: <your VC delegate>)
 	```
 	
 	where
